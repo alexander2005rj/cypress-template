@@ -20,13 +20,13 @@ jobs:
       #     browser: chrome
 
       - name: Install dependencies
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v4
         with:
           build: npx playwright install-deps webkit
           runTests: false
 
       - name: Cypress run
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v4
         with:
           install: false
           start: npm run start-quiet
