@@ -60,10 +60,10 @@ jobs:
         with:
           html-file: "cypress/report/index.html"
       
-      # - name: Test Summary
-      #   uses: pcolby/tap-summary@v1
-      #   with:
-      #     summary-file: path/to/output/file.md
+      - name: Test Summary
+        uses: pcolby/tap-summary@v1
+        with:
+          summary-file: cypress/report/index.md
     
       - name: Upload artifacts
         if: failure()
