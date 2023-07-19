@@ -19,11 +19,18 @@ jobs:
       #   with:
       #     browser: chrome
 
-      - name: Setup Webkit
-        run: npx playwright install-deps webkit
-  
-      - name: Run Webkit Tests
-        run: npx playwright test
+      - name: Install dependencies
+        uses: cypress-io/github-action@v5
+        with:
+          build: npx playwright install-deps webkit
+          runTests: false
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          install: false
+          start: npm run start-quiet
+          browser: webkit
         
       - name: Upload artifacts
         if: failure()
