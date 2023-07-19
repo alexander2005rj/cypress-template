@@ -9,26 +9,21 @@ jobs:
       - name: Checkout Test Repository
         uses: actions/checkout@v3
 
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
+      # - name: Setup Chrome
+      #   uses: browser-actions/setup-chrome@v1
+      #   with:
+      #     chrome-version: stable
 
-      - name: Run Chrome Tests
-        uses: cypress-io/github-action@v5
-        with:
-          browser: chrome
+      # - name: Run Chrome Tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     browser: chrome
 
       - name: Setup Webkit
-        uses: cypress-io/github-action@v5
-        with:
-          build: npx playwright install-deps webkit
-          runTests: false
+        run: npx playwright install-deps webkit
   
-      - name: Setup Webkit
-        uses: cypress-io/github-action@v5
-        with:
-          browser: webkit
+      - name: Run Webkit Tests
+        run: npx playwright test
         
       - name: Upload artifacts
         if: failure()
