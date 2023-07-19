@@ -18,6 +18,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
+          publish-summary: false
 
       - name: Setup Firefox
         uses: browser-actions/setup-firefox@v1
@@ -28,6 +29,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: firefox
+          publish-summary: false
 
       # - name: Setup Edge
       #   uses: browser-actions/setup-firefox@v1
@@ -53,7 +55,9 @@ jobs:
       #     browser: webkit
       
       - name: cypress-test-sumary
-        uses: layer5labs/cypress-test-summary@v1.1.0
+        uses: bastihav/scalatest-multiproject-html-action@v1
+        with:
+          path: "cypress/report/"
     
       - name: Upload artifacts
         if: failure()
