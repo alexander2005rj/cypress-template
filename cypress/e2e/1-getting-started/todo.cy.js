@@ -47,7 +47,7 @@ describe('example to-do app', () => {
     // https://on.cypress.io/selecting-elements
 
     // Forçando erro
-    cy.get('[data-test=new-todos]').type(`${newItem}{enter}`)
+    cy.get('[data-test=new-todo]').type(`${newItem}{enter}`)
 
     // Now that we've typed our new item, let's check that it actually was added to the list.
     // Since it's the newest item, it should exist as the last element in the list.
