@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --reporter mochawesome",
+    "smoke:tests": "cypress run --env grepTags='@smoke'"
+  },
+  "devDependencies": {
+    "cypress": "^12.17.1",
+    "cypress-mochawesome-reporter": "^3.5.1"
+  }
+}
