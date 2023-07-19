@@ -1,7 +1,10 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  viewportHeight: 660,
+  viewportWidth: 1000,
   defaultCommandTimeout: 30000,
+  videoCompression: false,
   experimentalWebKitSupport: true,
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
@@ -13,15 +16,10 @@ module.exports = defineConfig({
     saveAllAttempts: false,
     overwrite: true,
   },
-  requestTimeout: 10000,
-  responseTimeout: 30000,
   retries: {
-    runMode: 0,
+    runMode: 1,
     openMode: 0,
   },
-  viewportHeight: 660,
-  viewportWidth: 1000,
-  watchForFileChanges: false,
   e2e: {
     baseUrl: 'https://www.google.com.br',
     setupNodeEvents(on, config) {
