@@ -54,16 +54,11 @@ jobs:
       #     start: npx playwright test
       #     browser: webkit
       
-      - name: Convert HTML to Markdown
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: results/**/*.xml
         if: always()
-        uses: rknj/html2markdown@v0.1.0
-        with:
-          html-file: "cypress/report/index.html"
-      
-      - name: Test Summary
-        uses: pcolby/tap-summary@v1
-        with:
-          summary-file: cypress/report/index.md
     
       - name: Upload artifacts
         if: failure()
