@@ -19,13 +19,13 @@ jobs:
       #   with:
       #     browser: chrome
 
-      - name: Install dependencies
+      - name: Setup Webkit
         uses: cypress-io/github-action@v5
         with:
           build: npx playwright install-deps webkit
           runTests: false
 
-      - name: Cypress run
+      - name: Run Webkit Tests
         uses: cypress-io/github-action@v5
         with:
           install: false
