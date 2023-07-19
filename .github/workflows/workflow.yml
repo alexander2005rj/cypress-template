@@ -19,18 +19,38 @@ jobs:
         with:
           browser: chrome
 
-      - name: Setup Webkit
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: latest
+  
+      - name: Run Firefox Tests
         uses: cypress-io/github-action@v5
         with:
-          build: npx playwright install --with-deps webkit
-          runTests: false
+          browser: firefox
 
-      - name: Run Webkit Tests
-        uses: cypress-io/github-action@v5
-        with:
-          install: false
-          start: npx playwright test
-          browser: webkit
+      # - name: Setup Edge
+      #   uses: browser-actions/setup-firefox@v1
+      #   with:
+      #     edge-version: stable
+    
+      # - name: Run Edge Tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     browser: edge
+
+      # - name: Setup Webkit
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     build: npx playwright install --with-deps webkit
+      #     runTests: false
+
+      # - name: Run Webkit Tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     install: false
+      #     start: npx playwright test
+      #     browser: webkit
         
       - name: Upload artifacts
         if: failure()
