@@ -19,6 +19,17 @@ jobs:
         with:
           browser: chrome
 
+      - name: Setup Webkit
+        uses: cypress-io/github-action@v5
+        with:
+          build: npx playwright install-deps webkit
+          runTests: false
+  
+      - name: Setup Webkit
+        uses: cypress-io/github-action@v5
+        with:
+          browser: webkit
+        
       - name: Upload artifacts
         if: failure()
         uses: actions/upload-artifact@v3
