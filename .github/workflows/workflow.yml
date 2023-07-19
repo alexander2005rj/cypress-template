@@ -57,7 +57,7 @@ jobs:
       - name: cypress-test-sumary
         uses: bastihav/scalatest-multiproject-html-action@v1
         with:
-          path: "cypress/report/"
+          path: cypress/report
     
       - name: Upload artifacts
         if: failure()
