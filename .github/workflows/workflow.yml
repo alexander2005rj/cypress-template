@@ -51,7 +51,10 @@ jobs:
       #     install: false
       #     start: npx playwright test
       #     browser: webkit
-        
+      
+      - name: cypress-test-sumary
+        uses: layer5labs/cypress-test-summary@v1.1.0
+    
       - name: Upload artifacts
         if: failure()
         uses: actions/upload-artifact@v3
