@@ -54,10 +54,16 @@ jobs:
       #     start: npx playwright test
       #     browser: webkit
       
-      - name: cypress-test-sumary
-        uses: bastihav/scalatest-multiproject-html-action@v1
+      - name: Convert HTML to Markdown
+        if: always()
+        uses: rknj/html2markdown@v0.1.0
         with:
-          path: cypress/report
+          html-file: "cypress/report/index.html"
+      
+      # - name: Test Summary
+      #   uses: pcolby/tap-summary@v1
+      #   with:
+      #     summary-file: path/to/output/file.md
     
       - name: Upload artifacts
         if: failure()
