@@ -44,6 +44,8 @@ jobs:
           echo "| ---                         | ---                                     | ---                                     | ---                                       | ---                                       | ---                                                   |"  >> $GITHUB_STEP_SUMMARY
           echo "| Passing :heavy_check_mark:  | ${{steps.headless.outputs.numOfPassed}} | ${{steps.headless.outputs.numOfFailed}} | ${{steps.headless.outputs.numOfPending}}  | ${{steps.headless.outputs.numOfSkipped}}  | ${{steps.headless.outputs.durationInMilliseconds}} ms |"  >> $GITHUB_STEP_SUMMARY
          
+      - name: Adding a system path
+        run: echo "{path}" >> $GITHUB_PATH
 
       # - name: Setup Firefox
       #   uses: browser-actions/setup-firefox@v1
