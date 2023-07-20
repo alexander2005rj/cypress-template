@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const cypressTestResults = require("cypress-test-results");
 
 module.exports = defineConfig({
   viewportHeight: 660,
