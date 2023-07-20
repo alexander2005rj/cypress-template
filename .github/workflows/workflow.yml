@@ -54,17 +54,14 @@ jobs:
       #     start: npx playwright test
       #     browser: webkit
       
-      - name: Test Summary
-        uses: test-summary/action@v2
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
         with:
-          paths: "test/results/**/TEST-*.xml"
-          show: "all"
-        if: always()
+          name: JEST Tests            # Name of the check run which will be created
+          path: reports/jest-*.xml    # Path to test results
+          reporter: jest-junit        # Format of test results
 
-      - name: Overwrite Markdown
-        run: |
-          echo "Adding some Markdown content" >> $GITHUB_STEP_SUMMARY
-          echo "There was an error, we need to clear the previous Markdown with some new content." > $GITHUB_STEP_SUMMARY
     
       - name: Upload artifacts
         if: failure()
