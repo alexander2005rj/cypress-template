@@ -6,25 +6,22 @@ module.exports = defineConfig({
   defaultCommandTimeout: 30000,
   videoCompression: false,
   experimentalWebKitSupport: true,
-  reporter: 'cypress-mochawesome-reporter',
+  reporter: 'cypress-multi-reporters',
   reporterOptions: {
-    reportDir: 'cypress/report',
-    charts: true,
-    embeddedScreenshots: true,
-    inlineAssets: false,
-    videoOnFailOnly: true,
-    saveAllAttempts: false,
-    overwrite: true,
-  },
-  retries: {
-    runMode: 1,
-    openMode: 0,
+    reporterEnabled: 'tap,cypress-mochawesome-reporter',
+    cypressMochawesomeReporterOptions: {
+      charts: true,
+      embeddedScreenshots: true,
+      inlineAssets: false,
+      videoOnFailOnly: true,
+      saveAllAttempts: false,
+      overwrite: true,
+    },
   },
   e2e: {
     baseUrl: 'https://www.google.com.br',
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on, config);
-      return require('./cypress/plugins/index')(on, config)
     },
   },
 });

@@ -20,16 +20,16 @@ jobs:
           browser: chrome
           publish-summary: false
 
-      - name: Setup Firefox
-        uses: browser-actions/setup-firefox@v1
-        with:
-          firefox-version: latest
+      # - name: Setup Firefox
+      #   uses: browser-actions/setup-firefox@v1
+      #   with:
+      #     firefox-version: latest
   
-      - name: Run Firefox Tests
-        uses: cypress-io/github-action@v5
-        with:
-          browser: firefox
-          publish-summary: false
+      # - name: Run Firefox Tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     browser: firefox
+      #     publish-summary: false
 
       # - name: Setup Edge
       #   uses: browser-actions/setup-firefox@v1
@@ -53,19 +53,9 @@ jobs:
       #     install: false
       #     start: npx playwright test
       #     browser: webkit
-      
-      - if: ${{ always() }}
-        name: Show the saved JSON file
-        run: cat cypress/report/results.json
 
-      - if: ${{ always() }}
-        name: Commit any changed files
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Updated test counts table
-          branch: main
-          file_pattern: README.md
-
+      - name: Generating Summary Test Results
+        uses: pcolby/tap-summary@v1
     
       - name: Upload artifacts
         if: failure()

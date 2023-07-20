@@ -6,8 +6,8 @@
   },
   "devDependencies": {
     "cypress": "^12.17.1",
-    "cypress-json-results": "^1.5.0",
     "cypress-mochawesome-reporter": "^3.5.1",
+    "cypress-multi-reporters": "^1.6.3",
     "playwright-webkit": "^1.36.1"
   }
 }
