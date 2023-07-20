@@ -43,7 +43,7 @@ jobs:
             echo "### Cypress Results"
             echo "| Result                      | Passed :heavy_check_mark:               | Failed :x:                              | Pending :hand:                            | Skipped :leftwards_arrow_with_hook:       | Duration :clock8:                                   |"
             echo "| ---                         | ---                                     | ---                                     | ---                                       | ---                                       | ---                                                 |"
-            echo "| Passing :heavy_check_mark:  | ${{steps.headless.outputs.numOfPassed}} | ${{steps.headless.outputs.numOfFailed}} | ${{steps.headless.outputs.numOfPending}}  | ${{steps.headless.outputs.numOfSkipped}}  | ${{steps.headless.outputs.durationInMilliseconds}}  |"
+            echo "| Passing :heavy_check_mark:  | ${{steps.headless.outputs.numOfPassed}} | ${{steps.headless.outputs.numOfFailed}} | ${{steps.headless.outputs.numOfPending}}  | ${{steps.headless.outputs.numOfSkipped}}  | ${{steps.headless.outputs.duration}}                |"
           } >> $GITHUB_STEP_SUMMARY
 
       - name: Set output
