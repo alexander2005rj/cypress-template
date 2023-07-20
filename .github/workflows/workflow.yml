@@ -16,9 +16,17 @@ jobs:
 
       - name: Run Chrome Tests
         uses: cypress-io/github-action@v5
+        id: chrome-tests
         with:
           browser: chrome
           publish-summary: false
+      - run: |
+          {
+            echo "### Cypress Results"
+            echo "| Result                      | Passed :white_check_mark:                   | Failed :x:                                    | Pending :hand:                                | Skipped :leftwards_arrow_with_hook:           | Duration :clock:                                        |"
+            echo "| --------------------------- | -------------------------                   | ----------                                    | --------------                                | -----------------------------------           | ----------------                                        |"
+            echo "| Passing :white_check_mark:  | ${{steps.chrome-tests.outputs.numOfPassed}} | ${{steps.chrome-tests.outputs.numOfFailed}}   | ${{steps.chrome-tests.outputs.numOfPending}}  | ${{steps.chrome-tests.outputs.numOfSkipped}}  | ${{steps.chrome-tests.outputs.durationInMilliseconds}}  |"
+          } >> $GITHUB_STEP_SUMMARY
 
       # - name: Setup Firefox
       #   uses: browser-actions/setup-firefox@v1
@@ -55,7 +63,7 @@ jobs:
       #     browser: webkit
 
       - name: Generating Summary Test Results
-        uses: pcolby/tap-summary@v1
+        uses: .github/templates/cypress_summary.yml
     
       - name: Upload artifacts
         if: failure()
