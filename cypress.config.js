@@ -20,6 +20,7 @@ module.exports = defineConfig({
     baseUrl: 'https://www.google.com.br',
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on, config);
+      cypressTestResults(on, config)
     },
   },
 });

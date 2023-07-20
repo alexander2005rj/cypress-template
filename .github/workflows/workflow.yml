@@ -80,13 +80,13 @@ jobs:
       #     start: npx playwright test
       #     browser: webkit
 
-      - name: Generating Summary Test Results
-        uses: .github/templates/cypress_summary.yml
+      # - name: Generating Summary Test Results
+      #   uses: .github/templates/cypress_summary.yml
     
-      - name: Upload artifacts
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Tests Results
-          path: cypress/report
-          if-no-files-found: ignore
+      # - name: Upload artifacts
+      #   if: failure()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: Tests Results
+      #     path: cypress/report
+      #     if-no-files-found: ignore
