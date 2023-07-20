@@ -36,7 +36,7 @@ jobs:
           browser: chrome
           publish-summary: false
       
-      - if: inputs.print-inputs    
+      - if: ${{ inputs.BROWSER_CHOICE == 'chrome' }}   
         run: |
           {
             echo "### Cypress Results"
