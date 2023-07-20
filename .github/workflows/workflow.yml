@@ -1,24 +1,26 @@
 name: Workflow
 
-on:
-  workflow_call:
-    inputs:
-      BROWSER_CHOICE:
-        type: string
-        required: true
-        default: 'chrome'
+on: push
+
+# on:
+#   workflow_call:
+#     inputs:
+#       BROWSER_CHOICE:
+#         type: string
+#         required: true
+#         default: 'chrome'
         
-  workflow_dispatch:
-      inputs:
-        BROWSER_CHOICE:
-          type: choice
-          description: Selecione o browser a ser executado
-          options:
-            - "chrome"
-          required: true
+#   workflow_dispatch:
+#       inputs:
+#         BROWSER_CHOICE:
+#           type: choice
+#           description: Selecione o browser a ser executado
+#           options:
+#             - "chrome"
+#           required: true
 
 jobs:
-  cypress-run:
+  chrome_tests:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout Test Repository
@@ -31,18 +33,17 @@ jobs:
 
       - name: Run Chrome Tests
         uses: cypress-io/github-action@v5
-        id: chrome-tests
+        id: headless
         with:
           browser: chrome
           publish-summary: false
       
-      - if: ${{ inputs.BROWSER_CHOICE == 'chrome' }}   
-        run: |
+      - run: |
           {
             echo "### Cypress Results"
-            echo "| Result                      | Passed :white_check_mark:                   | Failed :x:                                    | Pending :hand:                                | Skipped :leftwards_arrow_with_hook:           | Duration :clock:                                        |"
-            echo "| --------------------------- | -------------------------                   | ----------                                    | --------------                                | -----------------------------------           | ----------------                                        |"
-            echo "| Passing :white_check_mark:  | ${{steps.chrome-tests.outputs.numOfPassed}} | ${{steps.chrome-tests.outputs.numOfFailed}}   | ${{steps.chrome-tests.outputs.numOfPending}}  | ${{steps.chrome-tests.outputs.numOfSkipped}}  | ${{steps.chrome-tests.outputs.durationInMilliseconds}}  |"
+            echo "| Result                      | Passed :white_check_mark:               | Failed :x:                              | Pending :hand:                            | Skipped :leftwards_arrow_with_hook:       | Duration :clock:                                    |"
+            echo "| --------------------------- | -------------------------               | ----------                              | --------------                            | -----------------------------------       | ----------------                                    |"
+            echo "| Passing :white_check_mark:  | ${{steps.headless.outputs.numOfPassed}} | ${{steps.headless.outputs.numOfFailed}} | ${{steps.headless.outputs.numOfPending}}  | ${{steps.headless.outputs.numOfSkipped}}  | ${{steps.headless.outputs.durationInMilliseconds}}  |"
           } >> $GITHUB_STEP_SUMMARY
 
       # - name: Setup Firefox
