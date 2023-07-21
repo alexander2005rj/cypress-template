@@ -39,8 +39,8 @@ jobs:
           browser: chrome
           publish-summary: false
       
-      # - name: cypress-test-sumary
-      #   uses: layer5labs/cypress-test-summary@v1.1.0
+      - name: cypress-test-sumary
+        uses: layer5labs/cypress-test-summary@v1.1.0
 
          
       # - name: Setup Firefox
