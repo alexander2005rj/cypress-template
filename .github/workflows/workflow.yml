@@ -1,23 +1,25 @@
 name: Workflow
 
-on: push
+on: 
+  push:
+    branches:
+      - main
 
-# on:
-#   workflow_call:
-#     inputs:
-#       BROWSER_CHOICE:
-#         type: string
-#         required: true
-#         default: 'chrome'
+  workflow_call:
+    inputs:
+      BROWSER_CHOICE:
+        type: string
+        required: true
+        default: 'chrome'
         
-#   workflow_dispatch:
-#       inputs:
-#         BROWSER_CHOICE:
-#           type: choice
-#           description: Selecione o browser a ser executado
-#           options:
-#             - "chrome"
-#           required: true
+  workflow_dispatch:
+      inputs:
+        BROWSER_CHOICE:
+          type: choice
+          description: Selecione o browser a ser executado
+          options:
+            - "chrome"
+          required: true
 
 jobs:
   chrome_tests:
@@ -33,20 +35,18 @@ jobs:
 
       - name: Run Chrome Tests
         uses: cypress-io/github-action@v5
-        id: headless
         with:
           browser: chrome
           publish-summary: false
+        env:
+          id: chrome
       
-      - run: |
-          echo "### Cypress Results"                                                                                                                                                                                                                                                  >> $GITHUB_STEP_SUMMARY
-          echo "| Result                      | Passed :heavy_check_mark:               | Failed :x:                              | Pending :hand:                            | Skipped :leftwards_arrow_with_hook:       | Duration :clock8:                                     |"  >> $GITHUB_STEP_SUMMARY
-          echo "| ---                         | ---                                     | ---                                     | ---                                       | ---                                       | ---                                                   |"  >> $GITHUB_STEP_SUMMARY
-          echo "| Passing :heavy_check_mark:  | ${{steps.headless.outputs.numOfPassed}} | ${{steps.headless.outputs.numOfFailed}} | ${{steps.headless.outputs.numOfPending}}  | ${{steps.headless.outputs.numOfSkipped}}  | ${{steps.headless.outputs.durationInMilliseconds}} ms |"  >> $GITHUB_STEP_SUMMARY
+      - name: Chrome Test Results
+        uses: /.github/templates/cypress_summary.yml
+        with: 
+          browser: chrome
+        
          
-      - name: Adding a system path
-        run: echo "{path}" >> $GITHUB_PATH
-
       # - name: Setup Firefox
       #   uses: browser-actions/setup-firefox@v1
       #   with:
