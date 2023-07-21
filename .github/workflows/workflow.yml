@@ -1,9 +1,9 @@
 name: Workflow
 
 on: 
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 
   workflow_call:
     inputs:
@@ -38,14 +38,6 @@ jobs:
         with:
           browser: chrome
           publish-summary: false
-        env:
-          id: chrome
-      
-      - name: Chrome Test Results
-        uses: /.github/templates/cypress_summary.yml
-        with: 
-          browser: chrome
-        
          
       # - name: Setup Firefox
       #   uses: browser-actions/setup-firefox@v1
