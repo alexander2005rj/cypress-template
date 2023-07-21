@@ -38,6 +38,7 @@ jobs:
         with:
           browser: chrome
           publish-summary: false
+          run: echo "$TEST_SUMMARY_RESULTS" >> $GITHUB_STEP_SUMMARY
          
       # - name: Setup Firefox
       #   uses: browser-actions/setup-firefox@v1
