@@ -1,5 +1,4 @@
 const { defineConfig } = require("cypress");
-const cypressTestResults = require("cypress-test-results");
 
 module.exports = defineConfig({
   viewportHeight: 660,
@@ -21,7 +20,6 @@ module.exports = defineConfig({
     baseUrl: 'https://www.google.com.br',
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on, config);
-      cypressTestResults(on, config)
     },
   },
 });
