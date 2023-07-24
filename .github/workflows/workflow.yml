@@ -90,5 +90,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Tests Results
-          path: cypress/report
+          path: cypress/reports
           if-no-files-found: ignore
