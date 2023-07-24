@@ -47,7 +47,7 @@ jobs:
           vars: |
             passed: ${{steps.chrome.outputs.numOfPassed}}
             failed: ${{steps.chrome.outputs.numOfFailed}}
-            pending: ${{steps.chrome.outputs.numOfPending}}
+            pendind: ${{steps.chrome.outputs.numOfPending}}
             skipped: ${{steps.chrome.outputs.numOfSkipped}}
             duration: ${{steps.chrome.outputs.durationInMilliseconds}}
 
