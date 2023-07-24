@@ -39,25 +39,21 @@ jobs:
           browser: chrome
           publish-summary: false
       
-      - name: Create CheckRun for code Coverage
-        uses: LouisBrunner/checks-action@v1.2.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Code Coverage
-          conclusion: ${{ job.status }}
-          output: "{\"summary\":\"Code Coverage\"}"
-          output_text_description_file: coveragereport/Summary.md     
+      # ==> IMPORTAR AQUI O REPORT GERADO EM TEST_SUMMARY.JS
          
-      # - name: Setup Firefox
-      #   uses: browser-actions/setup-firefox@v1
-      #   with:
-      #     firefox-version: latest
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: latest
   
-      # - name: Run Firefox Tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     browser: firefox
-      #     publish-summary: false
+      - name: Run Firefox Tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          publish-summary: false
+    
+      # ==> IMPORTAR AQUI O REPORT GERADO EM TEST_SUMMARY.JS
+
 
       # - name: Setup Edge
       #   uses: browser-actions/setup-firefox@v1
@@ -68,6 +64,10 @@ jobs:
       #   uses: cypress-io/github-action@v5
       #   with:
       #     browser: edge
+      #     publish-summary: false
+
+      # ==> IMPORTAR AQUI O REPORT GERADO EM TEST_SUMMARY.JS
+
 
       # - name: Setup Webkit
       #   uses: cypress-io/github-action@v5
@@ -81,14 +81,14 @@ jobs:
       #     install: false
       #     start: npx playwright test
       #     browser: webkit
+      #     publish-summary: false
 
-      # - name: Generating Summary Test Results
-      #   uses: .github/templates/cypress_summary.yml
+      # ==> IMPORTAR AQUI O REPORT GERADO EM TEST_SUMMARY.JS
     
-      # - name: Upload artifacts
-      #   if: failure()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Tests Results
-      #     path: cypress/report
-      #     if-no-files-found: ignore
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Tests Results
+          path: cypress/report
+          if-no-files-found: ignore
