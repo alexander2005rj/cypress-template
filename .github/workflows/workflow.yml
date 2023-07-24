@@ -40,7 +40,7 @@ jobs:
           browser: chrome
           publish-summary: false
       
-      - name: GitHub Actions Job Summary
+      - name: Chrome Tests - Job Summary
         uses: x-color/github-actions-job-summary@v0.1.1
         with:
           file: .github/workflows/summary.md
@@ -53,19 +53,28 @@ jobs:
 
 
          
-      # - name: Setup Firefox
-      #   uses: browser-actions/setup-firefox@v1
-      #   with:
-      #     firefox-version: latest
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: latest
   
-      # - name: Run Firefox Tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     browser: firefox
-      #     publish-summary: false
+      - name: Run Firefox Tests
+        uses: cypress-io/github-action@v5
+        id: firefox
+        with:
+          browser: firefox
+          publish-summary: false
     
-      # ==> IMPORTAR AQUI O REPORT GERADO EM TEST_SUMMARY.JS
-
+      - name: Firefox Tests - Job Summary
+        uses: x-color/github-actions-job-summary@v0.1.1
+        with:
+          file: .github/workflows/summary.md
+          vars: |
+            passed: ${{steps.chrome.outputs.numOfPassed}}
+            failed: ${{steps.chrome.outputs.numOfFailed}}
+            pendind: ${{steps.chrome.outputs.numOfPending}}
+            skipped: ${{steps.chrome.outputs.numOfSkipped}}
+            duration: ${{steps.chrome.outputs.durationInMilliseconds}}
 
       # - name: Setup Edge
       #   uses: browser-actions/setup-firefox@v1
