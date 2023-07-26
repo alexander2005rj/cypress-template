@@ -45,7 +45,14 @@ jobs:
         run: |
           SUMMARY="$(cat cypress/reports/summary-chrome.md)"
           echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-          
+      
+      - name: Chrome - Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Chrome - Tests Results
+          path: cypress/reports
+          if-no-files-found: ignore    
          
       - name: Setup Firefox
         # if: inputs.BROWSER_CHOICE == 'firefox'
@@ -59,14 +66,22 @@ jobs:
         with:
           browser: firefox
           publish-summary: false
-    
+
       - name: Firefox Tests - Job Summary
         run: |
           SUMMARY="$(cat cypress/reports/summary-firefox.md)"
           echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
 
+      - name: Firefox - Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Firefox - Tests Results
+          path: cypress/reports
+          if-no-files-found: ignore    
+
       - name: Setup Edge
-        uses: browser-actions/setup-firefox@v1
+        uses: browser-actions/setup-edge@v1
         with:
           edge-version: stable
     
@@ -78,8 +93,16 @@ jobs:
 
       - name: Edge Tests - Job Summary
         run: |
-          SUMMARY="$(cat cypress/reports/summary-firefox.md)"
+          SUMMARY="$(cat cypress/reports/summary-edge.md)"
           echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+
+      - name: Edge - Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Edge - Tests Results
+          path: cypress/reports
+          if-no-files-found: ignore 
 
       # - name: Setup Webkit
       #   uses: cypress-io/github-action@v5
@@ -97,10 +120,10 @@ jobs:
 
       # ==> IMPORTAR AQUI O REPORT GERADO EM TEST_SUMMARY.JS
     
-      - name: Upload artifacts
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Tests Results
-          path: cypress/reports
-          if-no-files-found: ignore
+      # - name: Upload artifacts
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: Tests Results
+      #     path: cypress/reports
+      #     if-no-files-found: ignore
