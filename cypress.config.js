@@ -1,5 +1,7 @@
 const { defineConfig } = require("cypress");
-// const cypressTestResults = require("cypress-test-results");
+const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
+const collectCypressTestResults = require('./cypress/support/test-summary');
+
 
 module.exports = defineConfig({
   viewportHeight: 660,
@@ -19,8 +21,18 @@ module.exports = defineConfig({
   },
   e2e: {
     setupNodeEvents(on, config) {
-      require('cypress-mochawesome-reporter/plugin')(on, config);
-      //cypressTestResults(on, config)
+      // require('cypress-mochawesome-reporter/plugin')(on, config);
+      // cypressTestResults(on, config)
+      on('before:run', async (details) => {
+        console.log('override before:run');
+        await beforeRunHook(details);
+      });
+
+      on('after:run', async (results) => {
+        console.log('override after:run');
+        await afterRunHook();
+        await collectCypressTestResults(results);
+      });
     },
   },
 })
