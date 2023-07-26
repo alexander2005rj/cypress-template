@@ -1,7 +1,5 @@
 node_modules/
 cypress/screenshots
 cypress/videos
-cypress/reports/assets
-cypress/reports/videos
-cypress/reports/index.html
+cypress/reports
 LICENSE.txt
