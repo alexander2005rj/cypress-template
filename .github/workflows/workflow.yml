@@ -44,7 +44,7 @@ jobs:
       
       - name: Chrome Tests - Job Summary
         run: |
-          SUMMARY="$(cat cypress/reports/summary-${{steps.id}}.md)"
+          SUMMARY="$(cat cypress/reports/summary-chrome.md)"
           echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
           
          
