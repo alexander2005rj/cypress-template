@@ -29,11 +29,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Chrome
+        # if: inputs.BROWSER_CHOICE == 'chrome'
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
 
       - name: Run Chrome Tests
+        # if: inputs.BROWSER_CHOICE == 'chrome'
         uses: cypress-io/github-action@v5
         id: chrome
         with:
@@ -41,6 +43,7 @@ jobs:
           publish-summary: false
       
       - name: Chrome Tests - Job Summary
+        # if: inputs.BROWSER_CHOICE == 'chrome'
         uses: x-color/github-actions-job-summary@v0.1.1
         with:
           file: .github/workflows/summary.md
@@ -50,31 +53,32 @@ jobs:
             pendind: ${{steps.chrome.outputs.numOfPending}}
             skipped: ${{steps.chrome.outputs.numOfSkipped}}
             duration: ${{steps.chrome.outputs.durationInMilliseconds}}
-
-
          
-      - name: Setup Firefox
-        uses: browser-actions/setup-firefox@v1
-        with:
-          firefox-version: latest
+      # - name: Setup Firefox
+      #   # if: inputs.BROWSER_CHOICE == 'firefox'
+      #   uses: browser-actions/setup-firefox@v1
+      #   with:
+      #     firefox-version: latest
   
-      - name: Run Firefox Tests
-        uses: cypress-io/github-action@v5
-        id: firefox
-        with:
-          browser: firefox
-          publish-summary: false
+      # - name: Run Firefox Tests
+      #   # if: inputs.BROWSER_CHOICE == 'firefox'
+      #   uses: cypress-io/github-action@v5
+      #   id: firefox
+      #   with:
+      #     browser: firefox
+      #     publish-summary: false
     
-      - name: Firefox Tests - Job Summary
-        uses: x-color/github-actions-job-summary@v0.1.1
-        with:
-          file: .github/workflows/summary.md
-          vars: |
-            passed: ${{steps.chrome.outputs.numOfPassed}}
-            failed: ${{steps.chrome.outputs.numOfFailed}}
-            pendind: ${{steps.chrome.outputs.numOfPending}}
-            skipped: ${{steps.chrome.outputs.numOfSkipped}}
-            duration: ${{steps.chrome.outputs.durationInMilliseconds}}
+      # - name: Firefox Tests - Job Summary
+      #   # if: inputs.BROWSER_CHOICE == 'firefox'
+      #   uses: x-color/github-actions-job-summary@v0.1.1
+      #   with:
+      #     file: .github/workflows/summary.md
+      #     vars: |
+      #       passed: ${{steps.chrome.outputs.numOfPassed}}
+      #       failed: ${{steps.chrome.outputs.numOfFailed}}
+      #       pendind: ${{steps.chrome.outputs.numOfPending}}
+      #       skipped: ${{steps.chrome.outputs.numOfSkipped}}
+      #       duration: ${{steps.chrome.outputs.durationInMilliseconds}}
 
       # - name: Setup Edge
       #   uses: browser-actions/setup-firefox@v1
