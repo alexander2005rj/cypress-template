@@ -23,7 +23,7 @@ on:
 
 jobs:
   cypress_tests:
-    runs-on: ubuntu-22.04
+    runs-on: macos-latest
     steps:
       - name: Checkout Test Repository
         uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
       #     browser: chrome
       #     publish-summary: false
       
-      # - name: Chrome Tests - Job Summary
+      # - name: Chrome - Job Summary
       #   run: |
       #     SUMMARY="$(cat cypress/reports/summary-chrome.md)"
       #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
@@ -67,7 +67,7 @@ jobs:
       #     browser: firefox
       #     publish-summary: false
 
-      # - name: Firefox Tests - Job Summary
+      # - name: Firefox - Job Summary
       #   run: |
       #     SUMMARY="$(cat cypress/reports/summary-firefox.md)"
       #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
@@ -91,7 +91,7 @@ jobs:
       #     browser: edge
       #     publish-summary: false
 
-      # - name: Edge Tests - Job Summary
+      # - name: Edge - Job Summary
       #   run: |
       #     SUMMARY="$(cat cypress/reports/summary-edge.md)"
       #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
@@ -118,6 +118,11 @@ jobs:
           browser: webkit
           publish-summary: false
 
+      - name: Webkit - Job Summary
+        run: |
+          SUMMARY="$(cat cypress/reports/summary-webkit.md)"
+          echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+      
       - name: Webkit - Upload artifacts
         if: always()
         uses: actions/upload-artifact@v3
@@ -125,13 +130,3 @@ jobs:
           name: Edge - Tests Results
           path: cypress/reports
           if-no-files-found: ignore 
-
-      # ==> IMPORTAR AQUI O REPORT GERADO EM TEST_SUMMARY.JS
-    
-      # - name: Upload artifacts
-      #   if: always()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Tests Results
-      #     path: cypress/reports
-      #     if-no-files-found: ignore
