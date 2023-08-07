@@ -28,105 +28,105 @@ jobs:
       - name: Checkout Test Repository
         uses: actions/checkout@v3
 
-      # - name: Setup Chrome
-      #   # if: inputs.BROWSER_CHOICE == 'chrome'
-      #   uses: browser-actions/setup-chrome@v1
-      #   with:
-      #     chrome-version: stable
+      - name: Setup Chrome
+        # if: inputs.BROWSER_CHOICE == 'chrome'
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
 
-      # - name: Run Chrome Tests
-      #   # if: inputs.BROWSER_CHOICE == 'chrome'
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     browser: chrome
-      #     publish-summary: false
-      
-      # - name: Chrome - Job Summary
-      #   run: |
-      #     SUMMARY="$(cat cypress/reports/summary-chrome.md)"
-      #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-      
-      # - name: Chrome - Upload artifacts
-      #   if: always()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Chrome - Tests Results
-      #     path: cypress/reports
-      #     if-no-files-found: ignore    
-         
-      # - name: Setup Firefox
-      #   # if: inputs.BROWSER_CHOICE == 'firefox'
-      #   uses: browser-actions/setup-firefox@v1
-      #   with:
-      #     firefox-version: latest
-  
-      # - name: Run Firefox Tests
-      #   # if: inputs.BROWSER_CHOICE == 'firefox'
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     browser: firefox
-      #     publish-summary: false
-
-      # - name: Firefox - Job Summary
-      #   run: |
-      #     SUMMARY="$(cat cypress/reports/summary-firefox.md)"
-      #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-
-      # - name: Firefox - Upload artifacts
-      #   if: always()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Firefox - Tests Results
-      #     path: cypress/reports
-      #     if-no-files-found: ignore    
-
-      # - name: Setup Edge
-      #   uses: browser-actions/setup-edge@v1
-      #   with:
-      #     edge-version: stable
-    
-      # - name: Run Edge Tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     browser: edge
-      #     publish-summary: false
-
-      # - name: Edge - Job Summary
-      #   run: |
-      #     SUMMARY="$(cat cypress/reports/summary-edge.md)"
-      #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-
-      # - name: Edge - Upload artifacts
-      #   if: always()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Edge - Tests Results
-      #     path: cypress/reports
-      #     if-no-files-found: ignore 
-
-      - name: Setup Webkit
+      - name: Run Chrome Tests
+        # if: inputs.BROWSER_CHOICE == 'chrome'
         uses: cypress-io/github-action@v5
         with:
-          build: npx playwright install --with-deps webkit
-          runTests: false
-
-      - name: Run Webkit Tests
-        uses: cypress-io/github-action@v5
-        with:
-          install: false
-          start: npm run test
-          browser: webkit
+          browser: chrome
           publish-summary: false
-
-      - name: Webkit - Job Summary
+      
+      - name: Chrome - Job Summary
         run: |
-          SUMMARY="$(cat cypress/reports/summary-webkit.md)"
+          SUMMARY="$(cat cypress/reports/summary-chrome.md)"
           echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
       
-      - name: Webkit - Upload artifacts
+      - name: Chrome - Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Chrome - Tests Results
+          path: cypress/reports
+          if-no-files-found: ignore    
+         
+      - name: Setup Firefox
+        # if: inputs.BROWSER_CHOICE == 'firefox'
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: latest
+  
+      - name: Run Firefox Tests
+        # if: inputs.BROWSER_CHOICE == 'firefox'
+        uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          publish-summary: false
+
+      - name: Firefox - Job Summary
+        run: |
+          SUMMARY="$(cat cypress/reports/summary-firefox.md)"
+          echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+
+      - name: Firefox - Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Firefox - Tests Results
+          path: cypress/reports
+          if-no-files-found: ignore    
+
+      - name: Setup Edge
+        uses: browser-actions/setup-edge@v1
+        with:
+          edge-version: stable
+    
+      - name: Run Edge Tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: edge
+          publish-summary: false
+
+      - name: Edge - Job Summary
+        run: |
+          SUMMARY="$(cat cypress/reports/summary-edge.md)"
+          echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+
+      - name: Edge - Upload artifacts
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: Edge - Tests Results
           path: cypress/reports
           if-no-files-found: ignore 
+
+      # - name: Setup Webkit
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     build: npx playwright install --with-deps webkit
+      #     runTests: false
+
+      # - name: Run Webkit Tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     install: false
+      #     start: npm run test
+      #     browser: webkit
+      #     publish-summary: false
+
+      # - name: Webkit - Job Summary
+      #   run: |
+      #     SUMMARY="$(cat cypress/reports/summary-webkit.md)"
+      #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+      
+      # - name: Webkit - Upload artifacts
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: Edge - Tests Results
+      #     path: cypress/reports
+      #     if-no-files-found: ignore 
