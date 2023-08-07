@@ -23,7 +23,7 @@ on:
 
 jobs:
   cypress_tests:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Test Repository
         uses: actions/checkout@v3
