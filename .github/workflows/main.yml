@@ -1,4 +1,4 @@
-name: Cypress Web Workflow
+name: Cypress Web Main Workflow
 
 on:
   pull_request:
