@@ -22,10 +22,10 @@ on:
         type: choice
         description: Selecione o browser a ser executado
         options:
+          - "todos"
           - "chrome"
           - "firefox"
           - "edge"
-          - "todos"
         required: true
 
 jobs:
