@@ -39,7 +39,7 @@ jobs:
     with:
       TEST_REPOSITORY: github.com/alexander2005rj/cypress-template
       TAG: ${{ inputs.TAG }}
-      BROWSER: ${{ matrix.BROWSER || 'chrome' }}
+      BROWSER: ${{ matrix.browser || 'chrome' }}
 
   specific_browser:
     uses: ./.github/workflows/workflow.yml
@@ -47,4 +47,4 @@ jobs:
     with:
       TEST_REPOSITORY: github.com/alexander2005rj/cypress-template
       TAG: ${{ inputs.TAG }}
-      BROWSER: ${{ matrix.BROWSER || 'chrome' }}
+      BROWSER: ${{ inputs.BROWSER_CHOICE || 'chrome' }}
