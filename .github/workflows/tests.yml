@@ -1,0 +1,53 @@
+name: Cypress Main Workflow
+
+on:
+  #   push:
+  #     branches:
+  #       - main
+  #   pull_request:
+  #     branches:
+  #       - main
+
+  #   workflow_call:
+  #     inputs:
+  #       BROWSER_CHOICE:
+  #         type: string
+  #         required: true
+  #         default: "todos"
+
+  workflow_dispatch:
+    inputs:
+      TAG:
+        required: false
+        description: Informe uma TAG para executar os testes - cenário ou suite (AND = '@tagA+tagB', OR = '@tagA @tagB')
+        type: string
+      BROWSER_CHOICE:
+        type: choice
+        description: Selecione o browser a ser executado
+        options:
+          - "todos"
+          - "chrome"
+          - "firefox"
+          - "edge"
+        required: true
+
+jobs:
+  all_browsers:
+    uses: ./.github/workflows/workflow.yml
+    if: ${{ github.event.inputs.BROWSER_CHOICE == 'todos' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox, edge]
+    with:
+      TEST_REPOSITORY: github.com/<usuario_github>/<nome_repositorio>
+      TAG: ${{ inputs.TAG }}
+      BROWSER: ${{ matrix.browser || 'chrome' }}
+
+  specific_browser:
+    uses: ./.github/workflows/workflow.yml
+    if: ${{ github.event.inputs.BROWSER_CHOICE != 'todos' }}
+    with:
+      TEST_REPOSITORY: github.com/<usuario_github>/<nome_repositorio>
+      TAG: ${{ inputs.TAG }}
+      BROWSER: ${{ inputs.BROWSER_CHOICE || 'chrome' }}
