@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-web-tests:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Test Repository
@@ -37,7 +37,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: Chrome - Tests Results
+          name: Test Report
           path: cypress/reports
           if-no-files-found: ignore
 
@@ -45,6 +45,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: Chrome - Tests Results
+          name: Visual Regression
           path: cypress/snapshots
           if-no-files-found: ignore
