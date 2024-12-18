@@ -1,14 +1,11 @@
 const { defineConfig } = require("cypress");
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 const collectCypressTestResults = require('./cypress/support/test-summary');
-
+const { configureVisualRegression } = require('cypress-visual-regression')
 
 module.exports = defineConfig({
-  viewportHeight: 660,
-  viewportWidth: 1000,
-  defaultCommandTimeout: 30000,
+  defaultCommandTimeout: 10000,
   videoCompression: false,
-  experimentalWebKitSupport: true,
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
     reportDir: 'cypress/reports',
@@ -20,6 +17,10 @@ module.exports = defineConfig({
     overwrite: true
   },
   e2e: {
+    env: {
+      visualRegressionType: 'regression'
+    },
+    screenshotsFolder: './cypress/snapshots/actual',
     setupNodeEvents(on, config) {
       on('before:run', async (details) => {
         console.log('override before:run');
@@ -31,6 +32,7 @@ module.exports = defineConfig({
         await afterRunHook();
         await collectCypressTestResults(results);
       });
+      configureVisualRegression(on)
     },
   },
-})
+});

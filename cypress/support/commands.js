@@ -1,25 +1,50 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import homePage from "../pages/home-page";
+import articlePage from "../pages/article-page";
+
+Cypress.Commands.add('goToWikipediaWebsite', () => {
+    cy.intercept('GET', '/portal/wikipedia.org/**').as('getHomeInfos');
+    cy.visit('https://www.wikipedia.org');
+    cy.wait('@getHomeInfos').its('response.statusCode').should('eq', 200);
+    cy.compareSnapshot("home", {failSilently: true});
+})
+
+
+Cypress.Commands.add('checkMainElementsOfTheMainPage', () => {
+    homePage.checkThePageTitle();
+    homePage.checkTheLogo();
+    homePage.checkLinkPortugueseArticles();
+    homePage.checkLinkRussianArticles();
+    homePage.checkLinkGermanArticles();
+    homePage.checkLinkSpanishArticles();
+    homePage.checkLinkItalianArticles();
+    homePage.checkLinkEnglishArticles();
+    homePage.checkLinkJapaneseArticles();
+    homePage.checkLinkFrenchArticles();
+    homePage.checkLinkChineseArticles();
+    homePage.checkLinkPersianArticles();
+    homePage.checkInputSearch();
+    homePage.checkButtonSearch();
+    homePage.checkButtonReadWikipediaInYourLanguage();
+})
+
+
+Cypress.Commands.add('searchByTerm', (term) => {
+    if (typeof term !== 'string') {
+        throw new TypeError('The parameter used is not of type string.')
+    }
+    cy.checkMainElementsOfTheMainPage();
+    homePage.performSearchByTerm(term);
+})
+
+Cypress.Commands.add('checkElementsOfTheTermPage', (term) => {
+    cy.searchByTerm(term);
+    articlePage.checkLogoWikipedia();
+    articlePage.checkTitleBrazil(term);
+    articlePage.checkTextNote(term);
+    articlePage.checkTableHeaderBold();
+    articlePage.checkTableHeaderSubtitle(term);
+    articlePage.checkImgFlagBrazil();
+    articlePage.checkImgCoatOfArms();
+    articlePage.checkImgMapMundi();
+    cy.compareSnapshot("article-page", {failSilently: true});
+})
