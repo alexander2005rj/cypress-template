@@ -2,11 +2,10 @@ const { defineConfig } = require("cypress");
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 const collectCypressTestResults = require('./cypress/support/test-summary');
 
-
 module.exports = defineConfig({
   viewportHeight: 660,
   viewportWidth: 1000,
-  defaultCommandTimeout: 30000,
+  defaultCommandTimeout: 5000,
   videoCompression: false,
   experimentalWebKitSupport: true,
   reporter: 'cypress-mochawesome-reporter',
@@ -33,4 +32,4 @@ module.exports = defineConfig({
       });
     },
   },
-})
+});

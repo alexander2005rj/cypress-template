@@ -1,6 +1,9 @@
 name: Cypress Web Main Workflow
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -37,7 +40,7 @@ jobs:
       matrix:
         browser: [chrome, firefox, edge]
     with:
-      TEST_REPOSITORY: github.com/alexander2005rj/cypress-template
+      TEST_REPOSITORY: github.com/<usuario_github>/<nome_repositorio>
       TAG: ${{ inputs.TAG }}
       BROWSER: ${{ matrix.browser || 'chrome' }}
 
@@ -45,6 +48,6 @@ jobs:
     uses: ./.github/workflows/workflow.yml
     if: ${{ github.event.inputs.BROWSER_CHOICE != 'todos' }}
     with:
-      TEST_REPOSITORY: github.com/alexander2005rj/cypress-template
+      TEST_REPOSITORY: github.com/<usuario_github>/<nome_repositorio>
       TAG: ${{ inputs.TAG }}
       BROWSER: ${{ inputs.BROWSER_CHOICE || 'chrome' }}
