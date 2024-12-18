@@ -1,11 +1,11 @@
-import homePage from "../pages/home-page"
-import searchResultPage from "../pages/search-result-page";
-
+import homePage from "../pages/home-page";
+import articlePage from "../pages/article-page";
 
 Cypress.Commands.add('goToWikipediaWebsite', () => {
     cy.intercept('GET', '/portal/wikipedia.org/**').as('getHomeInfos');
     cy.visit('https://www.wikipedia.org');
     cy.wait('@getHomeInfos').its('response.statusCode').should('eq', 200);
+    cy.compareSnapshot("home", {failSilently: true});
 })
 
 
@@ -38,12 +38,13 @@ Cypress.Commands.add('searchByTerm', (term) => {
 
 Cypress.Commands.add('checkElementsOfTheTermPage', (term) => {
     cy.searchByTerm(term);
-    searchResultPage.checkLogoWikipedia();
-    searchResultPage.checkTitleBrazil(term);
-    searchResultPage.checkTextNote(term);
-    searchResultPage.checkTableHeaderBold();
-    searchResultPage.checkTableHeaderSubtitle(term);
-    searchResultPage.checkImgFlagBrazil();
-    searchResultPage.checkImgCoatOfArms();
-    searchResultPage.checkImgMapMundi();
+    articlePage.checkLogoWikipedia();
+    articlePage.checkTitleBrazil(term);
+    articlePage.checkTextNote(term);
+    articlePage.checkTableHeaderBold();
+    articlePage.checkTableHeaderSubtitle(term);
+    articlePage.checkImgFlagBrazil();
+    articlePage.checkImgCoatOfArms();
+    articlePage.checkImgMapMundi();
+    cy.compareSnapshot("article-page", {failSilently: true});
 })

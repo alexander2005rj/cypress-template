@@ -9,8 +9,10 @@ Repositório criado para o xxxx
 ### Pacotes do projeto:
 
 - [Cypress](https://www.cypress.io/)
-- [mustache](https://www.npmjs.com/package/mustache)
+- [Mustache](https://www.npmjs.com/package/mustache)
 - [cypress-mochawesome-reporter](https://www.npmjs.com/package/cypress-mochawesome-reporter)
+- [Ajv JSON schema validator](https://www.npmjs.com/package/ajv)
+- [Cypress Visual Regression](https://www.npmjs.com/package/cypress-visual-regression)
 
 ### Instalação
 
@@ -42,13 +44,17 @@ Repositório criado para o xxxx
 │   ├── e2e (cenários web)
 │   │   ├── wikipedia
 │   |   │   ├── home.cy.js
-│   ├── fixture (massa de dados de stubs e spies)
+│   ├── fixture (massa para stubs, spies, schemas)
+│   │   ├── userSchema.json
 │   ├── pages (mapeamento de elementos de página)
 │   │   ├── home-page.js
 │   │   ├── search-result-page.js
+│   ├── reports (relatórios de execução)
+│   ├── snapshots (regressão visual)
 │   ├── support
-│   │   ├── commands.js (custom commands)
-│   │   ├── e2e.js (configuração dos testes e2e)
+│   │   ├── api-commands.js (custom commands de API)
+│   │   ├── commands.js (custom commands Web)
+│   │   ├── e2e.js (configuração dos testes e2e e custom commands)
 │   │   ├── test-summary.js (cria sumários por navegador - caso ocorra problemas no Github Actions)
 ├── .gitignore
 ├── cypress.config.js (configurações do Cypress)
@@ -56,14 +62,23 @@ Repositório criado para o xxxx
 ├── README.md
 ```
 
+## Cenários de teste
+
+1. Teste para a query user do [GraphqlZero](https://graphqlzero.almansi.me/#example-top)
+2. Testes E2E na página da [Wikipedia](https://www.wikipedia.org/)
+   2.1 Verificação da página principal
+   2.2 Realizar uma busca e verificação pelo termo "Brasil"
+
 ## Executando os testes
 
-1. Para rodar `TODOS` os testes, basta executar o seguinte comando:
+1. Para rodar `TODOS` em modo `headless` os testes, basta executar o seguinte comando:
 
    ```sh
-   $ npm run cypress:run
+   $ npm run test
    ```
 
-## Contribuições
+2. Para rodar em modo `interativo` os testes, basta executar o seguinte comando:
 
--
+   ```sh
+   $ npm run cy:open
+   ```
