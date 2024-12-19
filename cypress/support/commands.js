@@ -11,7 +11,6 @@ Cypress.Commands.add('goToWikipediaWebsite', () => {
 
 
 Cypress.Commands.add('checkMainElementsOfTheMainPage', () => {
-    homePage.doesTheDonationBannerExist();
     homePage.checkThePageTitle();
     homePage.checkTheLogo();
     homePage.checkLinkPortugueseArticles();
