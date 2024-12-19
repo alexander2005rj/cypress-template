@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Test Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1
@@ -23,15 +23,11 @@ jobs:
           chrome-version: stable
 
       - name: Run Chrome Tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          publish-summary: false
-
-      - name: Chrome - Job Summary
-        run: |
-          SUMMARY="$(cat cypress/reports/summary-chrome.md)"
-          echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+          headed: true
+          publish-summary: true
 
       - name: Chrome - Upload Report
         if: always()
