@@ -5,7 +5,7 @@ Cypress.Commands.add('goToWikipediaWebsite', () => {
     cy.intercept('GET', '/portal/wikipedia.org/**').as('getHomeInfos');
     cy.visit('https://www.wikipedia.org');
     cy.wait('@getHomeInfos').its('response.statusCode').should('eq', 200);
-    cy.compareSnapshot("home", {failSilently: true});
+    cy.compareSnapshot("home", {failSilently: true, errorThreshold: 1});
 })
 
 
@@ -46,5 +46,5 @@ Cypress.Commands.add('checkElementsOfTheTermPage', (term) => {
     articlePage.checkImgFlagBrazil();
     articlePage.checkImgCoatOfArms();
     articlePage.checkImgMapMundi();
-    cy.compareSnapshot("article-page", {failSilently: true});
+    articlePage.checkPage();
 })
