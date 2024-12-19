@@ -5,7 +5,8 @@ const { configureVisualRegression } = require('cypress-visual-regression')
 
 module.exports = defineConfig({
   defaultCommandTimeout: 15000,
-  requestTimeout: 20000,
+  requestTimeout: 30000,
+  responseTimeout: 30000,
   videoCompression: false,
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
