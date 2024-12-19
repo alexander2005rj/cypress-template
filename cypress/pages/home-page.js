@@ -2,6 +2,7 @@
 
 class HomePage {
     elements = {
+        bannerDonate: '.mw-fr-banner',
         titlePage: '.central-textlogo',
         centralFeatureLogo: 'img[class*=central-featured-logo]',
         linkPortugueseArticles: '#js-link-box-pt',
@@ -18,6 +19,17 @@ class HomePage {
         buttonSearch: '.pure-button',
         buttonReadWikipediaInYourLanguage: '#js-lang-list-button',
         divListLanguages: '#js-lang-lists'
+    }
+
+    doesTheDonationBannerExist() {
+        cy.get('body').then(($body) => {
+            if ($body.find('.mw-fr-banner').length > 0) {
+              cy.log('Banner de doação encontrado!');
+              cy.get('.mw-fr-banner').should('contain.text', 'Wikipedia is not for sale');
+            } else {
+              cy.log('Nenhum banner de doação encontrado.');
+            }
+        });
     }
 
     checkThePageTitle(){

@@ -2,6 +2,7 @@ import homePage from "../pages/home-page";
 import articlePage from "../pages/article-page";
 
 Cypress.Commands.add('goToWikipediaWebsite', () => {
+    cy.clearCookies();
     cy.intercept('GET', '/portal/wikipedia.org/**').as('getHomeInfos');
     cy.visit('https://www.wikipedia.org');
     cy.wait('@getHomeInfos').its('response.statusCode').should('eq', 200);
@@ -10,6 +11,7 @@ Cypress.Commands.add('goToWikipediaWebsite', () => {
 
 
 Cypress.Commands.add('checkMainElementsOfTheMainPage', () => {
+    homePage.doesTheDonationBannerExist();
     homePage.checkThePageTitle();
     homePage.checkTheLogo();
     homePage.checkLinkPortugueseArticles();
